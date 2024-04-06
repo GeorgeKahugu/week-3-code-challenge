@@ -1,32 +1,39 @@
 // Your code here
+// Create addEventListener with DOM
 document.addEventListener('DOMContentLoaded',function(){
+    const baseURL="http://localhost:3000/films" 
 
-})
-const baseURL="http://localhost:3000" 
+// Base URL for API
+    fetch("http://localhost:3000/films/1")
+    .then(Response =>Response.json())
+    .then(data=> getMovieDetails(data))
+     
+//   Call a function on getting the movie details  
+ function getMovieDetails(movie){
 
-fetch('/films/1')
-.then(Response=>Response.json())
-.then(data=>{
-    const id= data.id;
-    const title= data.title;
-    const runtime=data.runtime;
-    const capacity=data.capacity;
-    const showtime=data.showtime;
-    const ticketsSold=data.ticketsSold;
-    const description=data.description;
-    const poster=data.poster;
+// Selecting the films list
+    const filmslist=document.getElementById("films");
+    let li=document.createElement("li");
+    li.textContent=movie.title;
+    filmslist.appendChild("li");
 
 
-    const availableTickets=capacity-ticketsSold;
+// Selecting the Posters
+let poster=document.getElementById("poster")
+poster.src=movie.poster
+poster.alt=`${movie.title}Poster`;
 
-    document.getElementById('poster').src = poster;
-      document.getElementById('title').innerText = title;
-      document.getElementById('runtime').innerText = 'Runtime: ' + runtime + ' minutes';
-      document.getElementById('showtime').innerText = 'Showtime: ' + showtime;
-      document.getElementById('availableTickets').innerText = 'Available Tickets: ' + availableTickets;
-      document.getElementById('description').innerText = description;
-    })
-    .catch(error => {
-      console.error('Error fetching movie data:', error);
-    });
+// Selecting the movie titles
+let title=document.getElementById("title");
+title.textContent=movie.title
+
+
+
+ }
+
+}); 
+    
+      
+
+   
 
