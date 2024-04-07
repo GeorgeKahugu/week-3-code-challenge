@@ -192,12 +192,6 @@ document.addEventListener('DOMContentLoaded', function () {
               // Function to set showoing card
               initialiseCard(film);
   
-            //   if (film.capacity === film.tickets_sold) {
-            //     var button = document.getElementById('buy-ticket');
-  
-            //     button.innerHTML = "Sold Out";
-            //     button.disabled = true;
-            //   }
   
               return;
             }
@@ -431,10 +425,15 @@ document.addEventListener('DOMContentLoaded', function () {
     const poster = document.getElementById('poster');
     poster.src = film.poster;
 
-    if (film.capacity === film.tickets_sold) {
+      if (film.capacity === film.tickets_sold) {
         var button = document.getElementById('buy-ticket');
-
+    
         button.innerHTML = "Sold Out";
         button.disabled = true;
+      } else {
+        var button = document.getElementById('buy-ticket');
+    
+        button.innerHTML = "Buy Ticket";
+        button.disabled = false;
       }
   }
