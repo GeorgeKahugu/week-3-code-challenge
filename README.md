@@ -4,8 +4,6 @@
 
 ### Date: 05 April 2024
 
-#### By: George Kahugu 
-
 ## Description
 
 ## Flatdango
