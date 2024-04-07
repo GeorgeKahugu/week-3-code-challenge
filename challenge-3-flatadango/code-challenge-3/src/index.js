@@ -2,7 +2,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     // Call the function to getAllFilms here, this will get films as soon as the 'DOMContentLoaded' event is executed
     getAllFilms();
-    getSelectedFilm(1); // On load we get the first item on the films list always
+    // getSelectedFilm(); // On load we get the first item on the films list always
   
     var button = document.getElementById('buy-ticket');
   
@@ -52,26 +52,14 @@ document.addEventListener('DOMContentLoaded', function () {
         listItem.remove();
         
         // Call the API method when this event runs:
-        deleteFilm(filmId);
+        // deleteFilm(filmId);
       }
     });
   
-    // Event listener for delete button
-    // deleteButton.addEventListener('click', (event) => {
-    //   // Get the parent <li> element of the clicked button
-    //   const listItem = event.target.closest('li');
-      
-    //   // Remove the parent <li> element from the list
-    //   listItem.remove();
+   
+    });
   
-    //   // call delete api
-    //   deleteFilm(film.id);
-  
-    //   // The call fetch all
-    //   getAllFilms();
-    // });
-  
-  })
+//   })
   const baseURL = "http://localhost:3000"
   
   /** FUNCTIONS: */
@@ -109,7 +97,9 @@ document.addEventListener('DOMContentLoaded', function () {
   
               // Clear existing content of the <ul> element
               ul.innerHTML = '';
-  
+
+                initialiseCard(films[0])
+
               // Iterate over the JSON array and create <li> elements
               films.forEach(film => {
                 // Create a new <li> element
@@ -142,13 +132,17 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Append the <li> element to the <ul> element
                 ul.appendChild(li);
               });
+
+              
               return;
             }
   
             // Decode the chunk of data and append it to the accumulated data
             const decodedChunk = decoder.decode(value, { stream: true });
             accumulatedData += decodedChunk;
-  
+           
+
+
             // Continue reading next chunk
             readNextChunk();
           }).catch(error => {
@@ -156,7 +150,8 @@ document.addEventListener('DOMContentLoaded', function () {
             console.error('Error reading stream:', error);
           });
         }
-  
+            
+
         // Start reading the stream
         readNextChunk();
       })
@@ -197,12 +192,12 @@ document.addEventListener('DOMContentLoaded', function () {
               // Function to set showoing card
               initialiseCard(film);
   
-              if (film.capacity === film.tickets_sold) {
-                var button = document.getElementById('buy-ticket');
+            //   if (film.capacity === film.tickets_sold) {
+            //     var button = document.getElementById('buy-ticket');
   
-                button.innerHTML = "Sold Out";
-                button.disabled = true;
-              }
+            //     button.innerHTML = "Sold Out";
+            //     button.disabled = true;
+            //   }
   
               return;
             }
@@ -435,4 +430,11 @@ document.addEventListener('DOMContentLoaded', function () {
     // Set poster
     const poster = document.getElementById('poster');
     poster.src = film.poster;
+
+    if (film.capacity === film.tickets_sold) {
+        var button = document.getElementById('buy-ticket');
+
+        button.innerHTML = "Sold Out";
+        button.disabled = true;
+      }
   }
